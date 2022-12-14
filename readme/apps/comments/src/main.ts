@@ -1,7 +1,6 @@
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-
 import { AppModule } from './app/app.module';
 
 async function bootstrap() {
@@ -10,8 +9,8 @@ async function bootstrap() {
   app.setGlobalPrefix(globalPrefix);
 
   const swaggerConfig = new DocumentBuilder()
-    .setTitle("The 'Users' service")
-    .setDescription('Users service api')
+    .setTitle("The 'Comments' service")
+    .setDescription('Comments service api')
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, swaggerConfig);
