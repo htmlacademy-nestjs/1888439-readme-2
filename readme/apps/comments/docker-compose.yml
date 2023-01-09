@@ -4,17 +4,17 @@ services:
   mongodb:
     image: mongo
     restart: always
-    container_name: mongodb
+    container_name: mongodb-comments
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: password1234
-      MONGO_INITDB_DATABASE: readme-users
+      MONGO_INITDB_DATABASE: readme-comments
     ports:
-      - 27017:27017
+      - 27018:27017
     volumes:
-      - ${USERS_DB_DIR:-../../../db}:/data/db
+      - ${COMMENTS_DB_DIR:-../../../db/comments}:/data/db
     healthcheck:
-      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/typoteka-users --quiet
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/readme-comments --quiet
       interval: 10s
       timeout: 10s
       retries: 5
@@ -22,9 +22,9 @@ services:
   mongodb-express:
     image: mongo-express
     restart: always
-    container_name: mongo-express
+    container_name: mongo-express-comments
     ports:
-      - 8081:8081
+      - 8082:8081
     depends_on:
       - mongodb
     environment:
